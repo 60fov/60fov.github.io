@@ -1,0 +1,89 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+  <title>Brevity</title>
+
+  <link rel="stylesheet" href="/record/css/style.css" />
+</head>
+<body>
+  
+<header>
+  <img src="/record/assets/jds_white.svg" id="logo" alt="j$" />
+  <nav>
+    <ul>
+      <li><a href="about.html">@me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="content">
+<section class="markdown"><h1>Brevity</h1>
+<p>While learning OpenGL I have realized I don&apos;t write very maintainable code. Because of that I often rewrite code, so I decided I would try and see how others write more maintainable code. I&apos;m not a big fan of reading source code so to YouTube I go. After watching some videos of Uncle Bob and his take on clean code, I decide I didn&apos;t like a few of the ideas, I can&apos;t remember which ones, and it was also a bit a abstract for my current needs. Then I come across <a href="https://twitter.com/EskilSteenberg">Eskil Steenberg</a>, and <a href="https://youtu.be/443UNeGrFoM">how he programs in C</a>, and it&apos;s exactly what I was looking for. He gives pretty specific naming conventions, but more importantly he explains why he writes the way he does. His whole style is very different from mine and that&apos;s exactly what I needed a good switch up. His style is used mostly to encourage writing <span class="peek">readable, reusable, maintainable<span class="peek-text"> The Holy Trinity ✝ </span></span> code. Here are the main principles I <span class="peek">used<span class="peek-text">stole</span></span> from the video and their results.</p>
+<br />
+<h3>Principles:</h3>
+<ul>
+<li>Descriptive over concise naming
+<ul>
+<li>e.g. <code>set_mousemotion_proc()</code> -&gt; <code>pai_event_mousemotion_proc_set()</code></li>
+<li>being descriptive is very helpful long term</li>
+<li>writing longer lines is a small price to pay for readability</li>
+<li>this one was easy to follow fairly concrete</li>
+</ul>
+</li>
+<li>Keep logically sequential code sequential
+<ul>
+<li>minimize levels of indirection</li>
+<li>this rule is pretty vague</li>
+</ul>
+</li>
+<li>Keep it simple, stupid
+<ul>
+<li>aka, <span class="peek">DOTS<span class="peek-text"> Don&apos;t Over Think Shit </span></span>, s/o Kenny Beats</li>
+</ul>
+</li>
+<li>Start APIs from the outside
+<ul>
+<li>i.e. design the frontend then make the backend</li>
+<li>you write the backend <span class="peek">once<span class="peek-text"> <em>hopefully</em> </span></span> and reuse the interface</li>
+</ul>
+</li>
+<li>No <span class="peek">OO<span class="peek-text">Object Orientation</span></span>!
+<ul>
+<li>I refuse to write object oriented <span class="peek">code<span class="peek-text">personal projects</span></span> anyway so this one was easy</li>
+<li>OO doesn&apos;t mesh with game dev well</li>
+<li><span class="peek">Some people<span class="peek-text"> Brian Will, Johnathan Blow </span></span> have said that OO doesn&apos;t solve the problem and I have to agree</li>
+</ul>
+</li>
+</ul>
+<br />
+<h3>Results:</h3>
+<p>After using these conventions and following this principles, the resulting measured goals:</p>
+<ul>
+<li>Readability
+<ul>
+<li>definitely increased the organization is just beautiful tbh</li>
+</ul>
+</li>
+<li>Reusability
+<ul>
+<li>I did use the overall structure of the code I write first however this should be measure more long term</li>
+</ul>
+</li>
+<li>Maintainability
+<ul>
+<li>this ties directly into the organization of the structure which was awesome</li>
+</ul>
+</li>
+</ul>
+<br />
+<p>These principles were coupled with specific syntax rules, But of course, there were a few issues which boil down to, &quot;I tried to be too specific about the conventions&quot;, mostly syntactically. They were derived from C which doesn&apos;t mesh too well will the structure Nim. Especially imports vs includes, enums, bitfields, and Nim&apos;s existing naming conventions that are built into VSCode&apos;s syntax highlighting. These are all generally superficial, but they did make writing the code unpleasant at times. I definitely will change specific syntax conventions I made, but overall I think it was successful. I definitely learned a lot about code structure and my personal preferences, and writing potentially publicly used code.</p>
+<br />
+</section></section>
+
+<footer>
+</footer>
+
+</body>
+</html>

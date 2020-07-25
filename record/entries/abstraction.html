@@ -1,0 +1,109 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="ie=edge" http-equiv="X-UA-Compatible" />
+  <title>Levels of Abstraction</title>
+
+  <link rel="stylesheet" href="/record/css/style.css" />
+</head>
+<body>
+  
+<header>
+  <img src="/record/assets/jds_white.svg" id="logo" alt="j$" />
+  <nav>
+    <ul>
+      <li><a href="about.html">@me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="content">
+<section class="markdown"><h1>Levels of Abstraction</h1>
+<h2>Precursor</h2>
+<p>After watching some programming talks and one off videos, a few mentioned this idea of <em>not</em> mixing levels of abstraction in code, for readability/maintainability, and I agree, mostly. Some time passes I start writing OpenGL code, and the first thing I want to do is some abstraction. So I dive right in, making structs, writing functions, tracking state, so on and so forth. It quickly becomes an unwieldly mess. No preparation, no thought, no planning, you know, the <span class="peek">usual<span class="peek-text">OpenGL does not like the usual</span></span>. So after scrapping that first attempt, I decide to make a set of conventions and principles to help with organization and test a different style of programming. I talk more about said conventions and principles, <a href="/record/entries/brevity.html">here</a>.</p>
+<br />
+<h2>Back to Levels of Abstraction</h2>
+<p>So here I am, post conventions, staring at my code, and I notice I&apos;m using a few OpenGL, OpenGL-wrapped, and shader object calls in the main loop (mostly due to laziness) and I think to myself &quot;<em>sigh</em> these are definitely different levels of abstraction and they are certainly mixed&quot;. Then a side thought occurs, &quot;What <em>are</em> my levels of abstraction?&quot;</p>
+<p>So here we are, me and my <span class="peek">levels of abstraction<span class="peek-text">roooooll credits</span></span>.</p>
+<br />
+<h3>Level 0: Raw OpenGL</h3>
+<ul>
+<li>this isn&apos;t actually abstraction, hence the zero</li>
+<li>e.g. <code>glGenBuffers(...)</code>, <code>glEnable(GlEnum)</code>, etc.</li>
+<li>this should be completely abstracted away</li>
+</ul>
+<br />
+<h3>Level 1: OpenGL Wrapper</h3>
+<ul>
+<li>layer for type safety and consistent naming conventions</li>
+<li>layer is also completely optional, Nim is just a good language for it</li>
+<li>e.g. <code>gl_buffer_id_create(...)</code>, <code>gl_capability_enable(GLCapability)</code>, etc.</li>
+<li>if you need to call OpenGL directly this is the go-to</li>
+<li>writing this is mostly looking at and understanding OpenGL documentation</li>
+</ul>
+<br />
+<h3>Level 2: OpenGL <em>Objects</em></h3>
+<ul>
+<li>
+<p>groups frequent/related calls together in logical objects</p>
+<p>e.g.</p>
+<pre><code class="language-nim">gl_buffer_id_create(...)
+gl_buffer_id_bind(...)
+gl_buffer_data(...)
+gl_buffer_unbind(...)
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-nim">buffer_create(...)
+</code></pre>
+<p>and</p>
+<pre><code class="language-nim">gl_vertex_binding_bind(...)
+gl_vertex_binding_bind(...)
+gl_vertex_binding_divisor(...)
+gl_vertex_attrib_binding(...)
+gl_vertex_attrib_binding(...)
+gl_vertex_attrib_binding(...)
+gl_vertex_attrib_format(...)
+gl_vertex_attrib_format(...)
+gl_vertex_attrib_format(...)
+gl_vertex_attrib_enable(...)
+gl_vertex_attrib_enable(...)
+gl_vertex_attrib_enable(...)
+</code></pre>
+<p>becomes</p>
+<pre><code class="language-nim">binding1 = vertex_binding_create(...)
+binding2 = vertex_binding_create(...)
+attrib1 = vertex_attrib_create(...)
+attrib2 = vertex_attrib_create(...)
+attrib3 = vertex_attrib_create(...)
+layout = vertex_layout_create(
+  [binding1, binding2], 
+  [attrib1, attrib2, attrib3]
+)
+verex_array_layout_apply(vao, layout) # this one call
+</code></pre>
+</li>
+<li>
+<p>can also track OpenGL state minimizing slow upstream data transfer</p>
+</li>
+<li>
+<p>were most programming time and thought will be spent, it is the least concrete and requires a good understanding of OpenGL and what&apos;s happening to the overall state</p>
+</li>
+<li>
+<p>this could be split into two levels (convenience and state tracking), but it seems like unnecessary complexity</p>
+</li>
+</ul>
+<br />
+<h3>Level 3: Conceptual Graphics Objects</h3>
+<ul>
+<li>allows the developer to quickly create easily manageable graphics concepts and connect them to data</li>
+<li>e.g. meshes, models, materials, etc.</li>
+<li>this level is a bit weird, it doesn&apos;t have to contain just graphics concepts i.e. cameras, VFX, UI, etc., but in this case it probably will</li>
+</ul>
+</section></section>
+
+<footer>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+**/.sass-cache/
+*.css.map
+bin/
+*.dll
+/.vscode
+/_legacy

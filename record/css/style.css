@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 100%;
+  font-family: "Trebuchet MS", -apple-system, "BlinkMacSystemFont", "Helvetica", "Ubuntu", "Verdana", "Segoe UI", "Arial", sans-serif;
+}
+
+body {
+  background: #070707;
+  color: #F0F0F0;
+}
+
+a {
+  text-decoration: none;
+  color: #7FDBFF;
+  border-bottom: 2px #F0F0F0 solid;
+}
+a:visited {
+  color: #F0F0F0;
+}
+
+header #logo {
+  max-width: 50px;
+  margin: 30px;
+}
+header nav {
+  display: none;
+}
+
+#content {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+#content ul.entries li.entry {
+  list-style: none;
+  margin: 10px 0 0 0;
+  font-family: "Roboto", -apple-system, "BlinkMacSystemFont", "Helvetica", "Ubuntu", "Verdana", "Segoe UI", "Arial", sans-serif;
+}
+#content ul.entries li.entry span {
+  float: right;
+  visibility: hidden;
+}
+#content ul.entries li.entry:hover > span {
+  visibility: visible;
+}
+@media (hover: none) {
+  #content ul.entries li.entry span {
+    visibility: visible;
+  }
+}
+
+footer {
+  height: 200px;
+}
+
+section.markdown h1, section.markdown h2, section.markdown h3, section.markdown h4, section.markdown h5, section.markdown h6 {
+  font-family: "Roboto", -apple-system, "BlinkMacSystemFont", "Helvetica", "Ubuntu", "Verdana", "Segoe UI", "Arial", sans-serif;
+  color: #FFFFFF;
+}
+section.markdown h1 {
+  font-size: 3.9rem;
+  margin: 25px 0 70px -5%;
+}
+section.markdown h2 {
+  font-size: 2.3rem;
+  margin: 15px 0 15px -5%;
+}
+section.markdown h3 {
+  font-size: 1.6rem;
+  margin: 10px 0 10px -2.5%;
+}
+section.markdown h4 {
+  font-size: 1.2rem;
+  margin: 5px 0 5px -1.25%;
+}
+section.markdown h5 {
+  font-size: 1.1rem;
+  margin: 5px 0 5px -0.625%;
+}
+section.markdown h6 {
+  font-size: 1rem;
+  margin: 5px 0 5px 0%;
+}
+section.markdown p {
+  line-height: 1.5;
+  margin: 5px 0;
+}
+section.markdown ul, section.markdown ol {
+  list-style-type: unset;
+  margin: 10px 0 10px 0;
+}
+section.markdown li {
+  margin: 5px 0 5px 20px;
+}
+section.markdown pre {
+  padding: 15px;
+  background: #0f0f0f;
+  color: #F0F0F0;
+  border: 1px solid #AAAAAA;
+  border-radius: 3px;
+  overflow-x: scroll;
+}
+section.markdown code {
+  font-family: "Fira Code", monospace;
+  font-size: 0.8rem;
+}
+section.markdown .peek {
+  border-bottom: 1px dashed #FFFFFF;
+  position: relative;
+}
+section.markdown .peek:hover > .peek-text {
+  visibility: visible;
+}
+section.markdown .peek .peek-text {
+  font-weight: 600;
+  color: #070707;
+  background: #FFFFFF;
+  visibility: hidden;
+  position: absolute;
+  padding: 0px 5px;
+  border-radius: 2px;
+  bottom: -150%;
+  left: 0;
+  margin-left: -8px;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+/*# sourceMappingURL=style.css.map */

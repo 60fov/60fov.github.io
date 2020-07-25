@@ -1,0 +1,57 @@
+<html>
+	<head>
+		<title>ubc</title>
+		<style>
+			body { 
+				margin: 0; 
+				font-family: sans-serif; 
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				height: 100vh;
+				background: #293132;
+			}
+			#canvas {
+				cursor: url(assets/cursor40.png) 20 20, auto;
+				z-index: 1000;
+			}
+
+			#ui {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				font-family: sans-serif;
+			}
+			
+			#stats {
+				color: white;
+				font-size: 18px;
+				position: absolute;
+				right: 2%;
+				bottom: 2%;
+			}
+
+			#info {
+				color: white;
+				font-size: 18px;
+				position: absolute;
+				bottom: 2%;
+				left: 2%;
+			}
+
+		</style>
+	</head>
+	<body>
+		<div id="ui">
+			<div id="stats"></div>
+			<div id="info">r: reset | esc: toggle pause | p: toggle practic mode (soon tm) </div>
+		</div>
+    <canvas id="canvas"></canvas>
+    <script src="js/three.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/renderer.js"></script>
+		<script src="js/line_tracker.js"></script>
+		<script src="js/ui.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>
