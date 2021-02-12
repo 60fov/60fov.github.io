@@ -58,7 +58,7 @@ function place_bet() {
     var num = parseInt(input.value);
     if (isNaN(num)) num = 0;
     
-    bet_table[bet_btn_index][i] = num || 0;
+    bet_table[i][bet_btn_index] = num || 0;
   });
 
   bet_menu.style.visibility = "hidden";
@@ -66,45 +66,24 @@ function place_bet() {
 }
 
 function show_table() {
-// think Im storing the data incorrectly
-
+  var rem = document.getElementsByClassName("player-index"+bet_btn_index);
+  while (rem.length > 0) {
+    rem[0].parentNode.removeChild(rem[0]);
+  }
+  
   bet_table.forEach((tile_bets, ti) => {
     var bet_span = document.createElement("li");
-    console.log(bet_table);
-    console.log(bet_btn_index);
-    console.log(tile_bets);
-    bet_span.innerHTML = names[bet_btn_index].innerHTML + ": $" + tile_bets[bet_btn_index];
-    console.log(names[bet_btn_index].innerHTML + ": $" + tile_bets[bet_btn_index]);
-    bet_span.setAttribute("id", "player-index"+bet_btn_index);
-    bet_span.classList.add("bet-disp");
+    var bet_val = tile_bets[bet_btn_index];
+    if (bet_val != 0) {
+      var bet_name = names[bet_btn_index].innerHTML;
+      bet_span.innerHTML = bet_name + ": $" + bet_val;
+      bet_span.classList.add("player-index"+bet_btn_index);
+      bet_span.classList.add("bet-disp");
 
-
-    var toRemove = document.getElementById("player-index"+bet_btn_index);
-    
-    if (toRemove != null) 
-    {
-      try {
-        bet_list[ti].removeChild(toRemove);
-      } catch (ex) {
-        console.log(ex);
-      }
+      bet_list[ti].appendChild(bet_span);
     }
-    
-    bet_list[ti].appendChild(bet_span);
   });
 
-
-
-  // bet_table.forEach((tile_bets, ti) => {
-  //   tile_bets.every((bet, i) => {
-  //     if (bet == 0) return false;
-  //     var bet_span = document.createElement("li");
-  //     bet_span.innerHTML = names[i].innerHTML + ": $" + bet;
-  //     bet_span.classList.add("bet-disp");
-  //     bet_list[ti].appendChild(bet_span);
-  //     return true;
-  //   });
-  // });
 }
 
 
