@@ -6,6 +6,8 @@ var bet_menu = document.querySelector("#bet-menu");
 var bet_confirm = document.querySelector("#bet-confirm");
 var tiles = document.querySelectorAll('.tiles');
 var bet_list = document.querySelectorAll(".bet-list");
+var confirm_btns = document.querySelectorAll(".deposit");
+var money_fields = document.querySelectorAll(".money");
 
 console.log(dice);
 
@@ -16,10 +18,18 @@ var bet_table = [
   [],[],[],[],[],[]
 ];
 
+// var money_table = [
+
+// ];
+
 
 roll_btn.addEventListener("click", roll_dice);
 bet_btns.forEach(btn => {
   btn.addEventListener("click", bet);
+});
+
+confirm_btns.forEach(btn => {
+  btn.addEventListener("click", deposit);
 });
 
 bet_confirm.addEventListener('click', place_bet);
@@ -33,11 +43,21 @@ function tile_fn(tile_index) {
 }
 
 function roll_dice() {
-  dice[0].setAttribute("src", tile_fn(random(5)));
-  dice[1].setAttribute("src", tile_fn(random(5)));
-  dice[2].setAttribute("src", tile_fn(random(5)));
+  var dv = [ random(5),random(5),random(5) ];
+  dice[0].setAttribute("src", tile_fn(dv[0]));
+  dice[1].setAttribute("src", tile_fn(dv[1]));
+  dice[2].setAttribute("src", tile_fn(dv[2]));
+
+  
+  // bet_table[tile][player]
 }
 
+
+function deposit() {
+  var m = this.parentElement.previousElementSibling.previousElementSibling;
+  var a = parseInt(this.previousElementSibling.value);
+  m.innerHTML = parseInt(m.innerHTML) + a;
+}
 
 function bet() {
   bet_menu.style.visibility = "visible";
@@ -54,15 +74,20 @@ function bet() {
 function place_bet() {
   var bet_inputs = document.querySelectorAll(".bet-val");
 
+  var bet_sum = 0;
   bet_inputs.forEach((input, i) => {
     var num = parseInt(input.value);
     if (isNaN(num)) num = 0;
     
     bet_table[i][bet_btn_index] = num || 0;
+    bet_sum += num;
   });
 
+  
   bet_menu.style.visibility = "hidden";
   show_table();
+  var mfi = money_fields[bet_btn_index];
+  mfi.innerHTML = parseInt(mfi.innerHTML) - bet_sum;
 }
 
 function show_table() {

@@ -183,3 +183,21 @@ body {
   width: 80%;
   margin: auto;
 }
+
+
+.dep-wrapper {
+  display: flex;
+}
+
+.deposit-amount {
+  width: 40px;
+  background: none;
+  border: none;
+  border-bottom: white 2px solid;
+}
+
+.deposit {
+  border: white 2px solid;
+  padding: 0 2px;
+  margin:  4px 0 0 4px;
+}
