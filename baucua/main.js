@@ -8,6 +8,7 @@ var tiles = document.querySelectorAll('.tiles');
 var bet_list = document.querySelectorAll(".bet-list");
 var confirm_btns = document.querySelectorAll(".deposit");
 var money_fields = document.querySelectorAll(".money");
+var dep_inputs = document.querySelectorAll(".deposit-amount");
 
 console.log(dice);
 
@@ -43,13 +44,8 @@ function tile_fn(tile_index) {
 }
 
 function roll_dice() {
-  // reset bet_table
-  // reset bet_table display
-  // add confirm for next roll
-
   // display rolled die on tiles
   // style names on bets
-  
 
   var dv = [ random(5),random(5),random(5) ];
   dice[0].setAttribute("src", tile_fn(dv[0]));
@@ -76,21 +72,31 @@ function roll_dice() {
   console.log(this);
   this.removeEventListener("click", roll_dice);
   this.addEventListener("click", reset);
+  // console.log(bet_table);
 }
 
 function reset() {
-  bet_table = [[],[],[],[],[],[]]
+  bet_table = [[],[],[],[],[],[]];
   for (var i = 0; i < 16; i++) clear_player_bet(i);
+
   this.addEventListener("click", roll_dice);
   this.removeEventListener("click", reset);
   this.innerHTML = "roll";
+  bet_btns.forEach(btn => {
+    btn.addEventListener("click", bet);
+  });
 }
 
 
 function deposit() {
   var m = this.parentElement.previousElementSibling.previousElementSibling;
   var a = parseInt(this.previousElementSibling.value);
-  m.innerHTML = parseInt(m.innerHTML) + a;
+  if (!isNaN(a)) {
+    m.innerHTML = parseInt(m.innerHTML) + a;
+    dep_inputs.forEach(input => {
+      input.value = "";
+    });
+  }
 }
 
 function bet() {
@@ -101,6 +107,9 @@ function bet() {
     if (p.tagName == "DIV") bet_btn_index++;
     p = p.previousSibling;
   }
+  this.removeEventListener("click", bet);
+  this.classList.add("gray-out");
+  
 }
 
 
@@ -116,10 +125,14 @@ function place_bet() {
     bet_sum += num;
   });
 
-  bet_menu.style.visibility = "hidden";
-  show_table();
   var mfi = money_fields[bet_btn_index];
-  mfi.innerHTML = parseInt(mfi.innerHTML) - bet_sum;
+
+  if (parseInt(mfi.innerHTML) >= bet_sum) {
+    mfi.innerHTML = parseInt(mfi.innerHTML) - bet_sum;
+    bet_menu.style.visibility = "hidden";
+    show_table();
+  }
+  
 }
 
 function show_table() {
@@ -130,7 +143,7 @@ function show_table() {
     var bet_val = tile_bets[bet_btn_index];
     if (bet_val != 0) {
       var bet_name = names[bet_btn_index].innerHTML;
-      bet_span.innerHTML = bet_name + ": $" + bet_val;
+      bet_span.innerHTML = bet_name + ":" + bet_val;
       bet_span.classList.add("player-index"+bet_btn_index);
       bet_span.classList.add("bet-disp");
 
