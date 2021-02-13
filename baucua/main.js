@@ -12,18 +12,14 @@ var dep_inputs = document.querySelectorAll(".deposit-amount");
 
 console.log(dice);
 
-var tile_names = ["nai", "bau", "ga", "ca", "cua", "tom"]
+var tile_names = ["nai", "bau", "ga", "ca", "cua", "tom"];
 var bet_btn_index = -1;
 
 var bet_table = [
   [],[],[],[],[],[]
 ];
 
-
 var resetting = false;
-// var money_table = [
-
-// ];
 
 
 roll_btn.addEventListener("click", roll_dice);
@@ -114,7 +110,6 @@ function bet() {
   }
   this.removeEventListener("click", bet);
   this.classList.add("gray-out");
-  
 }
 
 
@@ -132,12 +127,11 @@ function place_bet() {
 
   var mfi = money_fields[bet_btn_index];
 
-  if (parseInt(mfi.innerHTML) >= bet_sum) {
+  if (parseInt(mfi.innerHTML) >= bet_sum && bet_sum <= 1500) {
     mfi.innerHTML = parseInt(mfi.innerHTML) - bet_sum;
     bet_menu.style.visibility = "hidden";
     show_table();
   }
-  
 }
 
 function show_table() {
