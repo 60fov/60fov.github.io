@@ -19,6 +19,8 @@ var bet_table = [
   [],[],[],[],[],[]
 ];
 
+
+var resetting = false;
 // var money_table = [
 
 // ];
@@ -72,6 +74,7 @@ function roll_dice() {
   console.log(this);
   this.removeEventListener("click", roll_dice);
   this.addEventListener("click", reset);
+  resetting = true;
   // console.log(bet_table);
 }
 
@@ -85,6 +88,7 @@ function reset() {
   bet_btns.forEach(btn => {
     btn.addEventListener("click", bet);
   });
+  resetting = false;
 }
 
 
@@ -100,6 +104,7 @@ function deposit() {
 }
 
 function bet() {
+  if (resetting) return;
   bet_menu.style.visibility = "visible";
   var p = this.parentElement.previousElementSibling;
   bet_btn_index = 0;
