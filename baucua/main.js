@@ -9,6 +9,8 @@ var bet_list = document.querySelectorAll(".bet-list");
 var confirm_btns = document.querySelectorAll(".deposit");
 var money_fields = document.querySelectorAll(".money");
 var dep_inputs = document.querySelectorAll(".deposit-amount");
+var dots = document.querySelectorAll(".tiles > span");
+
 
 console.log(dice);
 
@@ -34,7 +36,7 @@ confirm_btns.forEach(btn => {
 bet_confirm.addEventListener('click', place_bet);
 
 function random(a) {
-  return Math.round(Math.random() * a);
+  return Math.floor(Math.random() * (a));
 }
 
 function tile_fn(tile_index) {
@@ -45,7 +47,7 @@ function roll_dice() {
   // display rolled die on tiles
   // style names on bets
 
-  var dv = [ random(5),random(5),random(5) ];
+  var dv = [ random(6),random(6),random(6) ];
   dice[0].setAttribute("src", tile_fn(dv[0]));
   dice[1].setAttribute("src", tile_fn(dv[1]));
   dice[2].setAttribute("src", tile_fn(dv[2]));
@@ -65,6 +67,10 @@ function roll_dice() {
       });
     }
   });
+
+  dots[dv[0]].classList.remove("hide");
+  dots[dv[1]].classList.remove("hide");
+  dots[dv[2]].classList.remove("hide");
   
   this.innerHTML = "reset";
   console.log(this);
@@ -77,7 +83,7 @@ function roll_dice() {
 function reset() {
   bet_table = [[],[],[],[],[],[]];
   for (var i = 0; i < 16; i++) clear_player_bet(i);
-
+  for (var i = 0; i < 6; i++) dots[i].classList.add("hide");
   this.addEventListener("click", roll_dice);
   this.removeEventListener("click", reset);
   this.innerHTML = "roll";
@@ -85,6 +91,7 @@ function reset() {
     btn.addEventListener("click", bet);
   });
   resetting = false;
+  
 }
 
 
@@ -108,8 +115,7 @@ function bet() {
     if (p.tagName == "DIV") bet_btn_index++;
     p = p.previousSibling;
   }
-  this.removeEventListener("click", bet);
-  this.classList.add("gray-out");
+  document.getElementById("bet-name").innerText = names[bet_btn_index].innerText;
 }
 
 
@@ -128,6 +134,8 @@ function place_bet() {
   var mfi = money_fields[bet_btn_index];
 
   if (parseInt(mfi.innerHTML) >= bet_sum && bet_sum <= 1500) {
+    bet_btns[bet_btn_index].removeEventListener("click", bet);
+    bet_btns[bet_btn_index].classList.add("gray-out");
     mfi.innerHTML = parseInt(mfi.innerHTML) - bet_sum;
     bet_menu.style.visibility = "hidden";
     show_table();
