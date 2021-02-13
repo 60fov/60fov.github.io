@@ -43,13 +43,47 @@ function tile_fn(tile_index) {
 }
 
 function roll_dice() {
+  // reset bet_table
+  // reset bet_table display
+  // add confirm for next roll
+
+  // display rolled die on tiles
+  // style names on bets
+  
+
   var dv = [ random(5),random(5),random(5) ];
   dice[0].setAttribute("src", tile_fn(dv[0]));
   dice[1].setAttribute("src", tile_fn(dv[1]));
   dice[2].setAttribute("src", tile_fn(dv[2]));
 
+  var tile_occ = [0, 0, 0, 0, 0, 0];
+  tile_occ[dv[0]]++;
+  tile_occ[dv[1]]++;
+  tile_occ[dv[2]]++;
+  console.log(tile_occ);
+  tile_occ.forEach((occ, ti) => {
+    if (occ != 0) {
+      console.log(occ);
+      bet_table[ti].forEach((bet, pi) => {
+        if (bet != 0) {
+          money_fields[pi].innerHTML = parseInt(money_fields[pi].innerHTML) + bet * (occ + 1);
+        }
+      });
+    }
+  });
   
-  // bet_table[tile][player]
+  this.innerHTML = "reset";
+  console.log(this);
+  this.removeEventListener("click", roll_dice);
+  this.addEventListener("click", reset);
+}
+
+function reset() {
+  bet_table = [[],[],[],[],[],[]]
+  for (var i = 0; i < 16; i++) clear_player_bet(i);
+  this.addEventListener("click", roll_dice);
+  this.removeEventListener("click", reset);
+  this.innerHTML = "roll";
 }
 
 
@@ -67,7 +101,6 @@ function bet() {
     if (p.tagName == "DIV") bet_btn_index++;
     p = p.previousSibling;
   }
-  
 }
 
 
@@ -83,7 +116,6 @@ function place_bet() {
     bet_sum += num;
   });
 
-  
   bet_menu.style.visibility = "hidden";
   show_table();
   var mfi = money_fields[bet_btn_index];
@@ -91,10 +123,7 @@ function place_bet() {
 }
 
 function show_table() {
-  var rem = document.getElementsByClassName("player-index"+bet_btn_index);
-  while (rem.length > 0) {
-    rem[0].parentNode.removeChild(rem[0]);
-  }
+  clear_player_bet(bet_btn_index);
   
   bet_table.forEach((tile_bets, ti) => {
     var bet_span = document.createElement("li");
@@ -108,7 +137,11 @@ function show_table() {
       bet_list[ti].appendChild(bet_span);
     }
   });
-
 }
 
-
+function clear_player_bet(index) {
+  var rem = document.getElementsByClassName("player-index"+index);
+  while (rem.length > 0) {
+    rem[0].parentNode.removeChild(rem[0]);
+  }
+}
