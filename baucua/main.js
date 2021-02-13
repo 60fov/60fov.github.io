@@ -117,6 +117,9 @@ function bet() {
     p = p.previousSibling;
   }
   document.getElementById("bet-name").innerText = names[bet_btn_index].innerText;
+  document.querySelectorAll(".bet-val").forEach(el => {
+    el.value = "";
+  });
 }
 
 
