@@ -164,6 +164,7 @@ body {
   margin-top: 10px;
   border: white 2px solid;
   transition: background 100ms ease;
+  /* width: 20px; */
 }
 
 .bet:hover {
