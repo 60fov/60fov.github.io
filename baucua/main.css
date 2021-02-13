@@ -171,6 +171,10 @@ body {
   cursor: pointer;
 }
 
+.money {
+  font-size: 1.5rem;
+}
+
 #bet-menu {
   position: fixed;
   width: 15rem;
@@ -234,7 +238,7 @@ body {
   padding: 0 2px;
   margin:  4px 0 0 4px;
   transition: background 150ms ease;
-  cursor: pointer;  
+  cursor: pointer;
 }
 
 .deposit:hover {
