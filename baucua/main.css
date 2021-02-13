@@ -209,6 +209,12 @@ body {
   border: white 2px solid;
   width: 80%;
   margin: auto;
+  transition: background 200ms ease;
+  cursor: pointer;
+}
+
+#bet-confirm:hover {
+  background:rgba(255, 255, 255, 0.2);
 }
 
 

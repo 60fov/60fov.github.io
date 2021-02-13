@@ -109,6 +109,7 @@ function deposit() {
 function bet() {
   if (resetting) return;
   bet_menu.style.visibility = "visible";
+  // bet_menu.style.left = (100 + (bet_btn_index * 200)) + "px";
   var p = this.parentElement.previousElementSibling;
   bet_btn_index = 0;
   while (p != null) {
