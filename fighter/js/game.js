@@ -521,6 +521,12 @@ function start() {
   window.addEventListener("keydown", handle_keys);
   window.addEventListener("keyup", handle_keys);
 
+  var music = new Audio("assets/sound_waves.mp3");
+  music.volume = 0.1;
+  music.addEventListener("canplaythrough", event => {
+    music.play();
+  });
+
   // todo disable back button mouse4 
 
   // load things
@@ -541,6 +547,9 @@ start();
 
 
 /* TODO LIST
+Keybindings
+
+
 collision
   - BOX-CIRCLE (wip)
 
@@ -558,4 +567,7 @@ Mob
   mob that sticks
 
 Audio
+  better music
+  music controls 
+
 */
