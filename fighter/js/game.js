@@ -22,10 +22,10 @@ var ghost_timer = 0;
 var ghost_respawn_time = 1000;
 
 var actions = { 
-  "up": "e",
-  "down": "Alt",
-  "left": "s",
-  "right": "f"
+  "up": "w",
+  "down": "s",
+  "left": "a",
+  "right": "d"
 }
 
 var input_state = {
