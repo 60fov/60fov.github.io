@@ -28,7 +28,18 @@ function Enemy(x, y, dir) {
   };
 
   this.render = () => {
-    render_circle(this.x, this.y, this.r, "red");
+    let body = app.ctx.createRadialGradient(this.x, this.y, this.r/2, this.x, this.y, this.r);
+    body.addColorStop(0, "rgba(0, 0, 0, 0)");
+    body.addColorStop(0.8, "#CA3368");
+    render_circle(this.x, this.y, this.r, body);
+
+
+    var gr = this.r+5;
+    var glow = app.ctx.createRadialGradient(this.x, this.y, this.r, this.x, this.y, gr);
+    glow.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    glow.addColorStop(0.8, '#5A3968');
+    glow.addColorStop(1, 'rgba(255,255,255, 0.0)');
+    render_circle(this.x, this.y, gr, glow);
   };
 }
 

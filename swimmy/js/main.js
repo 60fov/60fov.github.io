@@ -1,7 +1,4 @@
-/* todo fixed delta game loop */
-/* divide entities into files w/ contructors, render and update functions */
-/* basic render functions */
-/* fix math lib to use dot notation with optional mutability */
+/* date high score reset when updating game */
 
 let last = 0;
 let spawner = {left: undefined, right: undefined, bottom: undefined, top: undefined};
@@ -32,8 +29,11 @@ function update(delta) {
       });
 
       app.game.entities = app.game.entities.filter(e => !e.remove);
+
+      app.game.highscore = Math.max(app.game.score, app.game.highscore);
       break;
     case "over":
+
       if (down(m1()) || down(m2())) init();
       break;
   }
@@ -60,8 +60,9 @@ function render() {
       break;
   }
 
-  draw_text(Math.trunc(app.game.score), "center", 50, "white", 25, "Arial");
-
+  draw_text(Math.trunc(app.game.score), "center", 30, "white", 20, "Arial");
+  draw_text(Math.trunc(app.game.highscore), "center", 55, "rgba(255, 255, 255, 0.8)", 20, "Arial");
+ 
   if (app.debug.active) {
     draw_texts(app.debug.lines, 10, 10, "white", 20, "Arial");
   }
@@ -97,7 +98,7 @@ function init() {
   app.game.player = new Player();
   app.game.entities = [];
 
-  let st = 4;
+  let st = 3;
   let range = Math.PI * 0.50;
   let size = 50;
   let off = 50 + size;
@@ -117,6 +118,7 @@ function init() {
   
 
   app.game.score = 0;
+  app.game.highscore = localStorage.getItem('highscore') || 0;
   app.game.state = "start";
 }
 

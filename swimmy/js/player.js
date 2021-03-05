@@ -51,12 +51,30 @@ function Player(x, y) {
   };
 
   this.render = () => {
-    render_circle(this.x, this.y, this.r, "white");
+    let bx = this.x + Math.cos(app.time + this.x / 1000) * 10;
+    let by = this.y + Math.sin(app.time + this.y / 1000) * 10;
+    let body = app.ctx.createRadialGradient(bx, by, this.r/2, bx, by, this.r * 2);
+    body.addColorStop(0, "#002DB5");
+    body.addColorStop(1, "#004BFF");
+    render_circle(this.x, this.y, this.r, body);
 
+    
+    let v = vs_mul(normalize(vv_sub(mouse, this)), 10); 
+    v = vv_add(this, v);
+    let vr = 5;
+    
+    let glow = app.ctx.createRadialGradient(v.x ,v.y, vr, v.x, v.y, vr+vr);
+    glow.addColorStop(0, "#00D9FF");
+    glow.addColorStop(0.5, "rgba(0, 217, 255, 0.2)");
+    glow.addColorStop(1, "rgba(0, 217, 255, 0)");
+    render_circle(this.x, this.y, this.r+5, glow);
+
+    render_circle(v.x, v.y, 5, "#080F44");
     // render_sprite(this.sprite, this.x, this.y);
   };
 
   this.kill = () => {
+    localStorage.setItem("highscore", app.game.highscore);
     app.game.state = "over";
   };
 }
