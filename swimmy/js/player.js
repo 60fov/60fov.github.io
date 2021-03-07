@@ -22,7 +22,7 @@ function Player(x, y) {
       this.vel = vv_add(this.vel, iv);
     }
 
-    let f = vs_mul(this.vel, 0.03);
+    let f = vs_mul(this.vel, 4.5 * delta);
     this.vel = vv_sub(this.vel, f);
 
     let x = this.x + this.vel.x;

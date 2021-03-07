@@ -3,7 +3,7 @@
 let last = 0;
 let date = new Date();
 let spawner = {left: undefined, right: undefined, bottom: undefined, top: undefined};
-let last_update = 1615097521500;
+let last_update = 1615098825939;
 
 function update(delta) {
   if (just_down(keys.d)) app.debug.active = !app.debug.active;
