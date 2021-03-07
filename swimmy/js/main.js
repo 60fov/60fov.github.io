@@ -1,7 +1,9 @@
 /* date high score reset when updating game */
 
 let last = 0;
+let date = new Date();
 let spawner = {left: undefined, right: undefined, bottom: undefined, top: undefined};
+let last_update = 1615097521500;
 
 function update(delta) {
   if (just_down(keys.d)) app.debug.active = !app.debug.active;
@@ -30,7 +32,11 @@ function update(delta) {
 
       app.game.entities = app.game.entities.filter(e => !e.remove);
 
-      app.game.highscore = Math.max(app.game.score, app.game.highscore);
+      if (app.game.highscore < app.game.score) {
+        app.game.highscore = app.game.score;
+        app.game.hs_date = date.getTime();
+      }
+      
       break;
     case "over":
 
@@ -98,7 +104,7 @@ function init() {
   app.game.player = new Player();
   app.game.entities = [];
 
-  let st = 3;
+  let st = 2;
   let range = Math.PI * 0.50;
   let size = 50;
   let off = 50 + size;
@@ -117,6 +123,7 @@ function init() {
   app.game.entities.push(spawner.bottom);
   
 
+  if (localStorage.getItem("hs_date") < last_update) localStorage.setItem("highscore", 0);
   app.game.score = 0;
   app.game.highscore = localStorage.getItem('highscore') || 0;
   app.game.state = "start";
