@@ -34,7 +34,7 @@ function update(delta) {
 
       if (app.game.highscore < app.game.score) {
         app.game.highscore = app.game.score;
-        localStorage.getItem("hs_date", date.getTime());
+        localStorage.setItem("hs_date", date.getTime());
       }
       
       break;
