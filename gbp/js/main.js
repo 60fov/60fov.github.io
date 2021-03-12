@@ -5,8 +5,8 @@ let app = {};
 let mouse = {x: 0, y: 0, left: 0, right: 0};
 let input = {up: 0, just_up: 1, down: 2, just_down: 3};
 let action_binds = {
-  left: ["KeyS"], 
-  right: ["KeyF"], 
+  left: ["KeyA"], 
+  right: ["KeyD"], 
   jump: ["Space", "KeyUp", "KeyE"], suicide: ["KeyR"]};
 let keys = {};
 let assets = {};
