@@ -191,14 +191,14 @@ let world = {
     entities: [
       {
         kind: "stage",
-        stage: "five",
+        stage: "three",
         asset_name: "door",
         tx: 10,
         ty: 8
       },
       {
         kind: "stage",
-        stage: "three",
+        stage: "five",
         asset_name: "door",
         tx: 13,
         ty: 2
@@ -217,6 +217,11 @@ let world = {
         kind: "orb",
         x:2,
         y: 4 * 16
+      },
+      {
+        kind: "orb",
+        x: 10 * 16,
+        y: 5 * 16 + 5
       }
     ],
   },
