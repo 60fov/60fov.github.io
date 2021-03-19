@@ -2,20 +2,24 @@ function Game() {
   this.time = 0;
   this.world = new World("one");
   this.player = new Player(this.world.spawn.x, this.world.spawn.y);
+  this.over = false;
   
   this.update = dt => {
+    if (!this.over) this.time += dt;
     this.player.update(dt);
     this.world.update(dt);
   }
 
   this.render = () => {
     this.world.render();
-    this.player.render();
+    this.player.render();    
   }
 
   this.reset = () => {
     this.world = new World("one");
     this.player = new Player(this.world.spawn.x, this.world.spawn.y);
+    this.over = false;
+    this.time = 0;
   }
 }
 
@@ -23,6 +27,7 @@ function Game() {
 function World(world_name) {
   let w = world[world_name];
 
+  this.end = w.end;
   this.w = w.w;
   this.h = w.h;
   this.tileset = w.tileset;
@@ -194,7 +199,7 @@ function Player(x, y) {
   
         if (this.vel.y > 0) this.state = "jump_fall";
         if (this.vel.y < 0) {
-          console.log("up");
+          
           if (this.jump < 2) {
             this.state = "jump_rise";
           } else {
@@ -505,6 +510,7 @@ function col_aabb_aabb(a, b) {
 
 function change_world(w) {
   game.world = new World(w);
+  if (game.world.end) game.over = true;
   game.player.x = game.world.spawn.x;
   game.player.y = game.world.spawn.y;
 }

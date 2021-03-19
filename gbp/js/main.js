@@ -15,17 +15,17 @@ function start() {
   app = new App(240, 160, 3, 'section');
   game = new Game();
 
-  fps_meter = new FPSMeter({
-    maxFps: 144,
-    graph: true
-  });
+  // fps_meter = new FPSMeter({
+  //   maxFps: 144,
+  //   graph: true
+  // });
 
   requestAnimationFrame(loop);
 }
 
 
 function loop(time) {
-  fps_meter.tickStart();
+  // fps_meter.tickStart();
 
   let delta = (time - last) / 1000;
   last = time;
@@ -36,13 +36,15 @@ function loop(time) {
     accum -= step;
     
     update_input();
+
+    document.getElementById("timer").innerText = game.time.toFixed(2);
   }
 
   app.screen.clear();
   game.render();
   app.screen.swap();
 
-  fps_meter.tick();
+  // fps_meter.tick();
 
   requestAnimationFrame(loop);
 }

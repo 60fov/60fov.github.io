@@ -16,3 +16,4 @@ function Vector(x, y) {
 }
 
 let vec_from_to = (a, b) => new Vector(b.x - a.x, b.y - a.y);
+let round = (a, p) => Math.round(a * 10**p) / 10**p;

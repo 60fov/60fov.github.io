@@ -46,6 +46,7 @@ let world = {
     ],
   },
   one: {
+    end: false,
     entities: [
       {
         kind: "stage",
@@ -81,6 +82,7 @@ let world = {
     tileset: { asset_name: "ts_stone", w: 12, h: 6, ts: 16 },
   },
   two: {
+    end: false,
     bgs: [
       {asset_name: "bg_0", speed: 1},
       {asset_name: "bg_1", speed: 2},
@@ -122,6 +124,7 @@ let world = {
     ],
   },
   three: {
+    end: false,
     bgs: [
       {asset_name: "bg_0", speed: 1},
       {asset_name: "bg_1", speed: 2},
@@ -168,6 +171,7 @@ let world = {
     ],
   }, 
   four: {
+    end: false,
     bgs: [
       {asset_name: "bg_0", speed: 1},
       {asset_name: "bg_1", speed: 2},
@@ -226,6 +230,7 @@ let world = {
     ],
   },
   five: {
+    end: false,
     bgs: [
       {asset_name: "bg_0", speed: 1},
       {asset_name: "bg_1", speed: 2},
@@ -279,6 +284,7 @@ let world = {
     ],
   },
   six: {
+    end: true,
     bgs: [
       {asset_name: "bg_0", speed: 1},
       {asset_name: "bg_1", speed: 2},

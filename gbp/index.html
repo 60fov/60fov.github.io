@@ -6,6 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>gbp</title>
 
+
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> 
+
   <script src="js/fpsmeter.min.js"></script>
   <script src="js/math.js"></script>
   <script src="js/data.js"></script>
@@ -24,14 +28,13 @@
       width: 100vw;
       height: 100vh;
       background: #98a;
-    }
-
-    section {
-      width: 100%;
-      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+
+    section {
+      position: relative;
     }
 
     canvas {
@@ -43,17 +46,28 @@
       font-family: Arial, Helvetica, sans-serif;;
       color: white;
       position: fixed;
+      font-size: 16px;
       bottom: 10px;
       left: 10px;
-      font-weight: 600;
+      font-family: "Press Start 2P";
     }
+
+    #timer {
+      position: absolute;
+      color: white;
+      top: 10px;
+      right: 10px;
+      font-family: "Press Start 2P";
+    }
+
   </style>
 
   
 </head>
 <body>
   <section>
+    <p id="timer"></p>
   </section>
-  <span> the point is to figure it out. there are bugs. refresh to restart. </span>
+  <span> instructions: figure it out. there are bugs. refresh to restart. </span>
 </body>
 </html>
